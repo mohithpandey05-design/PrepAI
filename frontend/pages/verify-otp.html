@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verify Email — PrepAI Platform</title>
+  <meta name="description" content="Enter the 6-digit verification code sent to your email to activate your PrepAI account.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="icon" type="image/png" href="../assets/logo-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-page">
+
+  <a href="#mainContent" class="skip-link">Skip to the form</a>
+
+  <div class="auth-layout">
+
+    <aside class="auth-brand-panel">
+      <a href="../index.html" class="auth-brand-logo">
+        <img src="../assets/logo-transparent.png" alt="PrepAI">
+      </a>
+
+      <div class="auth-brand-copy">
+        <h1>One last step.</h1>
+        <p>Verifying your email keeps your assessment results tied to an account only you control.</p>
+
+        <ul class="auth-points">
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>The code expires shortly — enter it now</span></li>
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Check your spam folder if it hasn't arrived</span></li>
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>You can request a new code after 60 seconds</span></li>
+        </ul>
+      </div>
+
+      <p class="auth-brand-footer">Practice. Prepare. Perform.</p>
+    </aside>
+
+    <main class="auth-form-panel" id="mainContent">
+      <div class="auth-card text-center">
+
+        <a href="../index.html" class="auth-mobile-logo">
+          <img src="../assets/logo-transparent.png" alt="PrepAI">
+        </a>
+
+        <div class="auth-header">
+          <h2>Verify your email</h2>
+          <p>
+            Enter the 6-digit code sent to<br>
+            <strong id="userEmailDisplay" class="text-primary">your email</strong>
+          </p>
+        </div>
+
+        <div id="alertBox" class="toast hidden" role="alert" aria-live="polite"></div>
+
+        <form id="otpForm" novalidate>
+          <div class="otp-inputs" role="group" aria-label="6-digit verification code">
+            <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 1" required autofocus autocomplete="one-time-code">
+            <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 2" required autocomplete="off">
+            <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 3" required autocomplete="off">
+            <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 4" required autocomplete="off">
+            <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 5" required autocomplete="off">
+            <input type="text" maxlength="1" class="otp-input" inputmode="numeric" pattern="[0-9]*" aria-label="Digit 6" required autocomplete="off">
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn btn-primary auth-submit">
+            <span class="btn-text">Verify &amp; continue <i class="fa-solid fa-check" aria-hidden="true"></i></span>
+            <span class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Verifying…</span>
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          Didn't receive a code? <a href="#" id="resendBtn">Resend OTP</a>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/verify-otp.js"></script>
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Video Interview — PrepAI</title>
+  <meta name="description" content="Structured AI video interview: record webcam answers to professionally generated questions, then receive a detailed AI performance report.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="icon" type="image/png" href="../assets/logo-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/interview.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+  <nav class="navbar">
+    <a href="../index.html" class="brand-logo">
+      <img src="../assets/logo-transparent.png" alt="PrepAI" class="brand-logo-img">
+    </a>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinksMenu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+    <div class="nav-links" id="navLinksMenu">
+      <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-gauge" aria-hidden="true"></i> Dashboard</a>
+      <a href="profile.html" class="nav-link"><i class="fa-solid fa-user" aria-hidden="true"></i> Profile &amp; Resume</a>
+      <a href="aptitude.html" class="nav-link"><i class="fa-solid fa-calculator" aria-hidden="true"></i> Aptitude Test</a>
+      <a href="coding.html" class="nav-link"><i class="fa-solid fa-code" aria-hidden="true"></i> Coding Round</a>
+      <a href="interview.html" class="nav-link active" aria-current="page"><i class="fa-solid fa-video" aria-hidden="true"></i> AI Video Interview</a>
+      <button id="logoutBtn" class="btn btn-secondary btn-sm">
+        <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Logout
+      </button>
+    </div>
+  </nav>
+
+  <main class="vi-page" id="mainContent">
+
+    <section id="startView" class="vi-start" aria-labelledby="viStartHeading">
+      <div class="vi-start__card glass-card">
+        <div class="vi-start__icon">
+          <i class="fa-solid fa-video" aria-hidden="true"></i>
+        </div>
+
+        <h1 id="viStartHeading" class="vi-start__title">AI Video Interview</h1>
+        <p class="vi-start__role" id="startRole">Software Engineer</p>
+        <p class="vi-start__lead">
+          Record your answers via webcam to AI-generated interview questions.
+          Your responses will be evaluated by AI to produce a detailed performance report.
+        </p>
+
+        <div class="vi-start__info-grid">
+          <div class="vi-info-card">
+            <i class="fa-solid fa-list-ol" aria-hidden="true"></i>
+            <span class="vi-info-card__label">Questions</span>
+            <span class="vi-info-card__value" id="startQCount">—</span>
+          </div>
+          <div class="vi-info-card">
+            <i class="fa-solid fa-clock" aria-hidden="true"></i>
+            <span class="vi-info-card__label">Duration</span>
+            <span class="vi-info-card__value" id="startDuration">—</span>
+          </div>
+          <div class="vi-info-card">
+            <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+            <span class="vi-info-card__label">Re-records / question</span>
+            <span class="vi-info-card__value" id="startRerecords">—</span>
+          </div>
+        </div>
+
+        <div class="vi-start__instructions">
+          <h3><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Instructions</h3>
+          <ul>
+            <li>Ensure you are in a quiet, well-lit environment.</li>
+            <li>The interviewer reads each question aloud, then you record your answer — turn your volume up.</li>
+            <li id="startInstrPrep">You get preparation time to think before each question.</li>
+            <li id="startInstrAnswer">Each answer has a maximum recording time.</li>
+            <li id="startInstrRerecord">You can re-record a limited number of times per question.</li>
+            <li id="startInstrFollowUp">Some answers earn a follow-up question that digs into what you just said.</li>
+            <li>Your webcam and microphone are required. We will ask permission on the next screen.</li>
+            <li>Do not navigate away or refresh during the interview.</li>
+          </ul>
+        </div>
+
+        <p class="vi-start__consent">
+          <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+          By starting, you consent to your webcam and microphone being recorded for this
+          assessment. Recordings stay on your device for the duration of the interview and
+          are used only to produce your transcript and report.
+        </p>
+
+        <button id="startInterviewBtn" class="btn btn-primary btn-lg vi-start__btn">
+          <span class="btn-text">Start Interview <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+          <span class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Preparing…</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="deviceCheckView" class="vi-device-check hidden" aria-labelledby="deviceCheckHeading">
+      <div class="vi-device-check__card glass-card">
+        <h2 id="deviceCheckHeading" class="vi-device-check__title">
+          <i class="fa-solid fa-gear" aria-hidden="true"></i> Camera &amp; Microphone Setup
+        </h2>
+        <p class="vi-device-check__lead">Make sure your camera and microphone are working properly before starting.</p>
+
+        <div class="vi-device-check__preview-area">
+          <video id="devicePreviewVideo" class="vi-preview-video" autoplay muted playsinline></video>
+          <div class="vi-preview-overlay" id="previewOverlay">
+            <i class="fa-solid fa-video-slash"></i>
+            <span>Camera not connected</span>
+          </div>
+        </div>
+
+        <div class="vi-permission-retry hidden" id="permissionRetry">
+          <p id="permissionRetryText">
+            We could not access your camera and microphone. Allow access in your browser's
+            address bar, then try again.
+          </p>
+          <button id="retryPermissionBtn" class="btn btn-secondary">
+            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Retry camera &amp; mic access
+          </button>
+        </div>
+
+        <div class="vi-device-check__mic-level">
+          <label>Microphone Level <span class="vi-mic-hint">Speak to see the bar move</span></label>
+          <div class="vi-mic-meter">
+            <div class="vi-mic-meter__bar" id="deviceMicBar"></div>
+          </div>
+        </div>
+
+        <div class="vi-device-check__selectors">
+          <div class="vi-device-select">
+            <label for="cameraSelect"><i class="fa-solid fa-camera" aria-hidden="true"></i> Camera</label>
+            <select id="cameraSelect" class="form-control"></select>
+          </div>
+          <div class="vi-device-select">
+            <label for="micSelect"><i class="fa-solid fa-microphone" aria-hidden="true"></i> Microphone</label>
+            <select id="micSelect" class="form-control"></select>
+          </div>
+          <div class="vi-device-select" id="speakerSelectWrap">
+            <label for="speakerSelect"><i class="fa-solid fa-volume-high" aria-hidden="true"></i> Speaker</label>
+            <select id="speakerSelect" class="form-control"></select>
+          </div>
+        </div>
+
+        <div class="vi-speaker-test">
+          <p class="vi-speaker-test__lead">
+            The interviewer reads every question out loud, so check your output device before you begin.
+          </p>
+          <div class="vi-speaker-test__row">
+            <button id="testSpeakerBtn" class="btn btn-secondary btn-sm" type="button">
+              <i class="fa-solid fa-volume-high" aria-hidden="true"></i> Play test sound
+            </button>
+            <button id="testVoiceBtn" class="btn btn-secondary btn-sm" type="button">
+              <i class="fa-solid fa-comment-dots" aria-hidden="true"></i> Hear the interviewer
+            </button>
+            <label class="vi-speaker-test__confirm" for="speakerHeardCheck">
+              <input type="checkbox" id="speakerHeardCheck">
+              <span>I could hear it</span>
+            </label>
+          </div>
+          <p class="vi-speaker-test__warning hidden" id="voiceUnsupportedNotice">
+            <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+            This browser cannot read questions aloud. Every question is still shown as text, so you
+            can complete the interview by reading it.
+          </p>
+        </div>
+
+        <div class="vi-device-check__status">
+          <div class="vi-status-item" id="cameraStatus">
+            <i class="fa-solid fa-circle-xmark"></i> <span>Camera not detected</span>
+          </div>
+          <div class="vi-status-item" id="micStatus">
+            <i class="fa-solid fa-circle-xmark"></i> <span>Microphone not detected</span>
+          </div>
+          <div class="vi-status-item" id="speakerStatus">
+            <i class="fa-solid fa-circle-xmark"></i> <span>Speaker not confirmed</span>
+          </div>
+        </div>
+
+        <div class="vi-stt-notice hidden" id="sttNotice">
+          <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+          <span>
+            This browser cannot transcribe speech automatically, so your spoken answer cannot
+            be scored. Your video will still record. For a full evaluation, use Chrome or Edge
+            on desktop.
+          </span>
+        </div>
+
+        <button id="beginInterviewBtn" class="btn btn-primary btn-lg" disabled>
+          <i class="fa-solid fa-play" aria-hidden="true"></i> Begin Interview
+        </button>
+        <p class="vi-device-check__gate hidden" id="beginGateHint">
+          Confirm your camera, microphone and speaker to continue.
+        </p>
+      </div>
+    </section>
+
+    <div id="interviewView" class="vi-interview hidden">
+
+      <div class="vi-progress-bar">
+        <div class="vi-progress-bar__fill" id="interviewProgressFill" style="width: 0%"></div>
+      </div>
+
+      <div class="vi-interview__layout">
+
+        <div class="vi-interview__left">
+          <div class="vi-camera-container">
+            <video id="interviewVideo" class="vi-camera-feed" autoplay muted playsinline></video>
+
+            <div class="vi-rec-indicator hidden" id="recIndicator">
+              <span class="vi-rec-dot"></span> REC
+            </div>
+
+            <div class="vi-prep-overlay" id="prepOverlay">
+              <div class="vi-prep-overlay__content">
+                <span class="vi-prep-overlay__label" id="prepOverlayLabel">Preparation Time</span>
+                <span class="vi-prep-overlay__timer" id="prepTimer">30</span>
+                <span class="vi-prep-overlay__hint" id="prepOverlayHint">Read the question and prepare your answer</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="vi-camera-controls">
+            <div class="vi-cam-status">
+              <span class="vi-cam-status__item is-active" id="camStatusIcon">
+                <i class="fa-solid fa-video"></i> Camera
+              </span>
+              <span class="vi-cam-status__item is-active" id="micStatusIcon">
+                <i class="fa-solid fa-microphone"></i> Mic
+              </span>
+            </div>
+            <div class="vi-answer-timer" id="answerTimerContainer">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              <span id="answerTimer" class="vi-answer-timer__value">2:00</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="vi-interview__right">
+          <div class="vi-question-panel">
+            <div class="vi-question-panel__header">
+              <span class="vi-question-number" id="questionNumber">Question 1 of 5</span>
+              <span class="vi-question-category badge badge-primary" id="questionCategory">Technical</span>
+            </div>
+
+            <div class="vi-interviewer" id="interviewerBar">
+              <span class="vi-interviewer__avatar" aria-hidden="true">
+                <i class="fa-solid fa-user-tie"></i>
+              </span>
+              <span class="vi-interviewer__label" id="interviewerLabel">AI Interviewer</span>
+              <span class="vi-interviewer__wave" id="interviewerWave" aria-hidden="true">
+                <i></i><i></i><i></i><i></i>
+              </span>
+              <span class="vi-interviewer__controls">
+                <button type="button" id="repeatQuestionBtn" class="vi-icon-btn" title="Repeat the question">
+                  <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+                  <span class="sr-only">Repeat the question</span>
+                </button>
+                <button type="button" id="muteVoiceBtn" class="vi-icon-btn" title="Mute the interviewer's voice" aria-pressed="false">
+                  <i class="fa-solid fa-volume-high" aria-hidden="true"></i>
+                  <span class="sr-only">Mute the interviewer's voice</span>
+                </button>
+              </span>
+            </div>
+
+            <p class="vi-followup-note hidden" id="followUpNote">
+              <i class="fa-solid fa-arrow-turn-down" aria-hidden="true"></i>
+              <span id="followUpNoteText">Follow-up on your previous answer.</span>
+            </p>
+
+            <h2 class="vi-question-text" id="questionText">Loading question…</h2>
+
+            <div class="vi-question-instructions" id="questionInstructions">
+              <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+              <span>Take a moment to think before answering. Speak clearly and concisely.</span>
+            </div>
+
+            <div class="vi-question-meta">
+              <span><i class="fa-solid fa-hourglass-start" aria-hidden="true"></i> Prep: <strong id="metaPrepTime">30s</strong></span>
+              <span><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> Max: <strong id="metaAnswerTime">2 min</strong></span>
+            </div>
+          </div>
+
+          <div class="vi-action-area">
+
+            <div class="vi-action-prep" id="actionPrep">
+              <p class="vi-action-hint" id="prepActionHint">Recording will begin after preparation time ends.</p>
+              <button id="skipPrepBtn" class="btn btn-secondary">
+                <i class="fa-solid fa-forward" aria-hidden="true"></i> Skip Prep &amp; Start Recording
+              </button>
+            </div>
+
+            <div class="vi-action-recording hidden" id="actionRecording">
+              <button id="finishAnswerBtn" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-stop" aria-hidden="true"></i> Finish Answer
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="reviewView" class="vi-review hidden" aria-labelledby="reviewHeading">
+      <div class="vi-review__card glass-card">
+        <h2 id="reviewHeading" class="vi-review__title">
+          <i class="fa-solid fa-play-circle" aria-hidden="true"></i> Review Your Answer
+        </h2>
+        <p class="vi-review__qtext" id="reviewQuestionText">Question text here</p>
+
+        <div class="vi-review__player-wrap">
+          <video id="reviewPlayer" class="vi-review__player" controls playsinline></video>
+        </div>
+
+        <div class="vi-review__transcript">
+          <h4><i class="fa-solid fa-closed-captioning" aria-hidden="true"></i> Transcript</h4>
+          <p id="reviewTranscript" class="vi-review__transcript-text">Your spoken words will appear here.</p>
+        </div>
+
+        <div class="vi-review__actions">
+          <button id="rerecordBtn" class="btn btn-secondary">
+            <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Re-record <span id="rerecordCount">(2 left)</span>
+          </button>
+          <button id="confirmAnswerBtn" class="btn btn-primary">
+            <span class="btn-text">Confirm &amp; Continue <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></span>
+            <span class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Submitting…</span>
+          </button>
+        </div>
+
+        <p class="vi-review__error hidden" id="reviewSubmitError" role="alert"></p>
+      </div>
+    </section>
+
+    <section id="completedView" class="vi-completed hidden" aria-labelledby="completedHeading">
+      <div class="vi-completed__card glass-card text-center">
+        <div class="vi-completed__icon">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+        <h1 id="completedHeading">Interview Completed!</h1>
+        <p class="vi-completed__lead">
+          Great job! All your answers have been recorded and submitted for AI evaluation.
+        </p>
+        <div class="vi-completed__stats">
+          <div class="vi-completed__stat">
+            <span class="vi-completed__stat-val" id="completedQCount">0</span>
+            <span class="vi-completed__stat-label">Questions Answered</span>
+          </div>
+          <div class="vi-completed__stat">
+            <span class="vi-completed__stat-val" id="completedDuration">0 min</span>
+            <span class="vi-completed__stat-label">Duration</span>
+          </div>
+        </div>
+        <button id="viewReportBtn" class="btn btn-primary btn-lg">
+          <span class="btn-text">View AI Interview Report <i class="fa-solid fa-chart-column" aria-hidden="true"></i></span>
+          <span class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Generating report…</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="reportView" class="vi-report hidden" aria-labelledby="reportHeading">
+      <div class="vi-report__header text-center">
+        <span class="badge badge-success">Interview Completed</span>
+        <h1 id="reportHeading">AI Performance Report</h1>
+        <p class="vi-report__lead">Detailed evaluation of your video interview responses.</p>
+      </div>
+
+      <div class="vi-report__score-section">
+        <div class="score-circle">
+          <div id="repScore">0</div>
+          <small>Overall Score</small>
+        </div>
+        <p class="vi-report__summary" id="repSummary"></p>
+        <p class="vi-report__meta" id="repMeta"></p>
+      </div>
+
+      <div class="vi-report__categories glass-card">
+        <h2 class="vi-report__section-title"><i class="fa-solid fa-chart-bar" aria-hidden="true"></i> Category Scores</h2>
+        <div class="vi-score-bars">
+          <div class="vi-score-bar-item">
+            <div class="vi-score-bar-label">
+              <span>Technical Skills</span>
+              <span class="vi-score-bar-value" id="catTechnical">0</span>
+            </div>
+            <div class="vi-score-bar-track"><div class="vi-score-bar-fill" id="catTechnicalBar" style="width:0%" data-color="primary"></div></div>
+          </div>
+          <div class="vi-score-bar-item">
+            <div class="vi-score-bar-label">
+              <span>Communication</span>
+              <span class="vi-score-bar-value" id="catCommunication">0</span>
+            </div>
+            <div class="vi-score-bar-track"><div class="vi-score-bar-fill" id="catCommunicationBar" style="width:0%" data-color="purple"></div></div>
+          </div>
+          <div class="vi-score-bar-item">
+            <div class="vi-score-bar-label">
+              <span>Problem Solving</span>
+              <span class="vi-score-bar-value" id="catProblemSolving">0</span>
+            </div>
+            <div class="vi-score-bar-track"><div class="vi-score-bar-fill" id="catProblemSolvingBar" style="width:0%" data-color="cyan"></div></div>
+          </div>
+          <div class="vi-score-bar-item">
+            <div class="vi-score-bar-label">
+              <span>Confidence</span>
+              <span class="vi-score-bar-value" id="catConfidence">0</span>
+            </div>
+            <div class="vi-score-bar-track"><div class="vi-score-bar-fill" id="catConfidenceBar" style="width:0%" data-color="success"></div></div>
+          </div>
+          <div class="vi-score-bar-item">
+            <div class="vi-score-bar-label">
+              <span>Relevance</span>
+              <span class="vi-score-bar-value" id="catRelevance">0</span>
+            </div>
+            <div class="vi-score-bar-track"><div class="vi-score-bar-fill" id="catRelevanceBar" style="width:0%" data-color="warning"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vi-report__sw-grid">
+        <div class="glass-card vi-report__block is-strengths">
+          <h2 class="vi-report__block-title"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Strengths</h2>
+          <ul id="repStrengths" class="custom-bullet-list"></ul>
+        </div>
+        <div class="glass-card vi-report__block is-growth">
+          <h2 class="vi-report__block-title"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Areas for Improvement</h2>
+          <ul id="repWeaknesses" class="custom-bullet-list"></ul>
+        </div>
+      </div>
+
+      <div class="glass-card vi-report__block is-suggestions">
+        <h2 class="vi-report__block-title"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Actionable Suggestions</h2>
+        <ul id="repSuggestions" class="custom-bullet-list"></ul>
+      </div>
+
+      <div class="glass-card vi-report__block is-learning">
+        <h2 class="vi-report__block-title"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Recommended Learning Path</h2>
+        <ul id="repLearning" class="custom-bullet-list"></ul>
+      </div>
+
+      <div class="glass-card vi-report__block is-evidence">
+        <h2 class="vi-report__block-title"><i class="fa-solid fa-list-check" aria-hidden="true"></i> Question-by-Question Feedback</h2>
+        <div id="repPerAnswerList" class="vi-answer-log"></div>
+      </div>
+
+      <div class="vi-report__actions">
+        <a href="dashboard.html" class="btn btn-primary btn-lg">
+          Return to Dashboard <i class="fa-solid fa-house" aria-hidden="true"></i>
+        </a>
+      </div>
+
+      <p class="vi-report__disclaimer">
+        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+        This report is an AI-generated assessment of your recorded answers, intended as
+        practice feedback to support your preparation. Scores are indicative, not a
+        definitive measure of your ability.
+      </p>
+    </section>
+
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/interview.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account — PrepAI Platform</title>
+  <meta name="description" content="Create a free PrepAI account to start your role-tailored technical assessment pipeline.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="icon" type="image/png" href="../assets/logo-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/auth.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="auth-page">
+
+  <a href="#mainContent" class="skip-link">Skip to the form</a>
+
+  <div class="auth-layout">
+
+    <aside class="auth-brand-panel">
+      <a href="../index.html" class="auth-brand-logo">
+        <img src="../assets/logo-transparent.png" alt="PrepAI">
+      </a>
+
+      <div class="auth-brand-copy">
+        <h1>Find out where you stand before it counts.</h1>
+        <p>One account runs the whole loop — resume, aptitude, coding, and a video interview that grades what you actually said.</p>
+
+        <ul class="auth-points">
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Free to start — no credit card required</span></li>
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Automatic role detection across 16 job tracks</span></li>
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Coding problems in Python, C++, Java, and JavaScript</span></li>
+          <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Per-question feedback, not just a final number</span></li>
+        </ul>
+      </div>
+
+      <p class="auth-brand-footer">Practice. Prepare. Perform.</p>
+    </aside>
+
+    <main class="auth-form-panel" id="mainContent">
+      <div class="auth-card auth-card-wide">
+
+        <a href="../index.html" class="auth-mobile-logo">
+          <img src="../assets/logo-transparent.png" alt="PrepAI">
+        </a>
+
+        <div class="auth-header">
+          <h2>Start your assessment</h2>
+          <p>Create an account to initialize your role-tailored pipeline.</p>
+        </div>
+
+        <div id="alertBox" class="toast hidden" role="alert" aria-live="polite"></div>
+
+        <form id="signupForm" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="fullName">Full name</label>
+            <div class="input-group">
+              <i class="fa-solid fa-user" aria-hidden="true"></i>
+              <input type="text" id="fullName" class="form-control" placeholder="Jordan Rivera" required autocomplete="name">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">Email address</label>
+            <div class="input-group">
+              <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+              <input type="email" id="email" class="form-control" placeholder="name@example.com" required autocomplete="email">
+            </div>
+            <span class="form-hint">We'll send a 6-digit verification code to this address.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <div class="input-group">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i>
+              <input type="password" id="password" class="form-control" placeholder="••••••••" required minlength="8" autocomplete="new-password">
+              <button type="button" class="input-action" data-toggle-password="password" aria-label="Show password">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+              </button>
+            </div>
+            <span class="form-hint">At least 8 characters.</span>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="confirmPassword">Confirm password</label>
+            <div class="input-group">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i>
+              <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••" required autocomplete="new-password">
+              <button type="button" class="input-action" data-toggle-password="confirmPassword" aria-label="Show password">
+                <i class="fa-solid fa-eye" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn btn-primary auth-submit">
+            <span class="btn-text">Send verification code <i class="fa-solid fa-paper-plane" aria-hidden="true"></i></span>
+            <span class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Sending…</span>
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          Already have an account? <a href="login.html">Sign in</a>
+        </div>
+      </div>
+    </main>
+
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/auth-ui.js"></script>
+  <script src="../js/signup.js"></script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recruiter Admin Portal — PrepAI</title>
+  <meta name="description" content="Recruiter console for candidate assessment records, resume analysis, and platform metrics.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="icon" type="image/png" href="../assets/logo-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+  <nav class="navbar">
+    <a href="../index.html" class="brand-logo">
+      <img src="../assets/logo-transparent.png" alt="PrepAI" class="brand-logo-img">
+    </a>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinksMenu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+    <div class="nav-links" id="navLinksMenu">
+      <span class="badge badge-primary"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Admin</span>
+      <button id="exportCsvBtn" class="btn btn-secondary btn-sm">
+        <i class="fa-solid fa-file-csv" aria-hidden="true"></i> Export CSV
+      </button>
+      <button id="logoutBtn" class="btn btn-secondary btn-sm">
+        <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Logout
+      </button>
+    </div>
+  </nav>
+
+  <main class="admin-page-container" id="mainContent">
+
+    <header class="dashboard-header mb-5">
+      <div>
+        <h1>Recruiter &amp; administrator portal</h1>
+        <p class="subtitle">Monitor candidate performance, review resume analysis, and track platform metrics.</p>
+      </div>
+    </header>
+
+    <section class="admin-stats-grid mb-5" aria-label="Platform metrics">
+      <div class="glass-card stat-card">
+        <div class="stat-icon" aria-hidden="true"><i class="fa-solid fa-users"></i></div>
+        <div>
+          <div class="stat-val" id="statTotalUsers">—</div>
+          <div class="stat-lbl">Registered candidates</div>
+        </div>
+      </div>
+
+      <div class="glass-card stat-card">
+        <div class="stat-icon is-success" aria-hidden="true"><i class="fa-solid fa-user-check"></i></div>
+        <div>
+          <div class="stat-val" id="statVerifiedUsers">—</div>
+          <div class="stat-lbl">Verified emails</div>
+        </div>
+      </div>
+
+      <div class="glass-card stat-card">
+        <div class="stat-icon" aria-hidden="true"><i class="fa-solid fa-file-arrow-up"></i></div>
+        <div>
+          <div class="stat-val" id="statResumesUploaded">—</div>
+          <div class="stat-lbl">Resumes analysed</div>
+        </div>
+      </div>
+
+      <div class="glass-card stat-card">
+        <div class="stat-icon is-warning" aria-hidden="true"><i class="fa-solid fa-calculator"></i></div>
+        <div>
+          <div class="stat-val" id="statAptPassRate">—</div>
+          <div class="stat-lbl">Aptitude pass rate</div>
+        </div>
+      </div>
+
+      <div class="glass-card stat-card">
+        <div class="stat-icon is-violet" aria-hidden="true"><i class="fa-solid fa-video"></i></div>
+        <div>
+          <div class="stat-val" id="statAvgInterviewScore">—</div>
+          <div class="stat-lbl">Avg interview score</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="glass-card" aria-labelledby="candidatesHeading">
+      <div class="section-toolbar">
+        <h2 id="candidatesHeading">
+          <i class="fa-solid fa-id-card" aria-hidden="true"></i> Candidate assessments
+        </h2>
+
+        <div class="admin-search">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <label class="sr-only" for="searchInput">Search candidates</label>
+          <input type="search" id="searchInput" class="form-control" placeholder="Search by name or email…">
+        </div>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="modern-table">
+          <thead>
+            <tr>
+              <th scope="col">Candidate</th>
+              <th scope="col">Email</th>
+              <th scope="col">Target role</th>
+              <th scope="col">Resume</th>
+              <th scope="col">Aptitude</th>
+              <th scope="col">Coding</th>
+              <th scope="col">Interview</th>
+              <th scope="col" class="col-action">Action</th>
+            </tr>
+          </thead>
+          <tbody id="candidatesTableBody" aria-live="polite">
+            <tr>
+              <td colspan="8" class="table-message">
+                <i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Loading candidate records…
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="pagination-row">
+        <span class="pagination-info" id="paginationInfo">Page 1 of 1</span>
+        <div class="pagination-controls">
+          <button id="prevPageBtn" class="btn btn-secondary btn-sm" disabled>
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+          <button id="nextPageBtn" class="btn btn-secondary btn-sm" disabled>
+            Next <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="candidateModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modalCandidateName">
+    <div class="glass-card modal-content candidate-modal">
+      <div class="modal-header">
+        <h2 id="modalCandidateName">Candidate details</h2>
+        <button type="button" id="closeModalBtn" class="modal-close" aria-label="Close candidate details">&times;</button>
+      </div>
+
+      <div id="modalBody">
+        <p class="modal-message"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Loading…</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

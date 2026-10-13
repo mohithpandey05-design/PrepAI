@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PrepAI — AI-Powered Technical Assessment &amp; Interview Platform</title>
+  <meta name="description" content="PrepAI runs the full technical hiring pipeline: ATS resume scoring, timed aptitude testing, a role-tailored coding IDE, and an AI video interview with an evidence-based report.">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="canonical" href="https://prepai.app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PrepAI">
+  <meta property="og:title" content="PrepAI — AI-Powered Technical Assessment &amp; Interview Platform">
+  <meta property="og:description" content="Resume ATS scoring, timed aptitude testing, a role-tailored coding IDE, and an AI video interviewer — in one pipeline.">
+  <meta property="og:image" content="assets/prepai_dashboard_ui.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PrepAI — AI-Powered Technical Assessment Platform">
+  <meta name="twitter:description" content="Practice. Prepare. Perform. The complete AI interview preparation pipeline.">
+  <meta name="twitter:image" content="assets/prepai_dashboard_ui.jpg">
+
+  <link rel="icon" type="image/png" href="assets/logo-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/landing.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <nav class="navbar">
+    <a href="index.html" class="brand-logo">
+      <img src="assets/logo-transparent.png" alt="PrepAI" class="brand-logo-img">
+    </a>
+
+    <button type="button" class="mobile-nav-toggle" id="mobileNavToggle" aria-controls="navLinksMenu" aria-expanded="false" aria-label="Open navigation menu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+
+    <div class="nav-links" id="navLinksMenu">
+      <a href="#how-it-works" class="nav-link">How it works</a>
+      <a href="#features" class="nav-link">Features</a>
+      <a href="#pipeline" class="nav-link">Pipeline</a>
+      <a href="#faq" class="nav-link">FAQ</a>
+      <a href="pages/login.html" class="btn btn-secondary">Sign in</a>
+      <a href="pages/signup.html" class="btn btn-primary">Get started <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+    </div>
+  </nav>
+
+  <main id="main">
+
+    <section class="hero-section">
+      <p class="hero-badge">
+        <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Powered by Google Gemini
+      </p>
+
+      <h1 class="hero-title">
+        Master tech interviews with<br>
+        <span class="gradient-text">AI diagnostic precision</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Upload your resume and PrepAI builds the whole loop around it — ATS scoring, a timed aptitude exam,
+        role-matched coding problems in a real IDE, and a recorded video interview that grades what you actually said.
+      </p>
+
+      <div class="hero-cta">
+        <a href="pages/signup.html" class="btn btn-primary btn-lg">
+          Start free assessment <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+        <a href="pages/login.html" class="btn btn-secondary btn-lg">Candidate sign in</a>
+      </div>
+
+      <p class="hero-note">No credit card required · Four rounds · Full diagnostic report</p>
+
+      <div class="hero-visual">
+        <div class="browser-chrome">
+          <div class="browser-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <div class="browser-url">prepai.app/dashboard</div>
+        </div>
+        <img src="assets/prepai_dashboard_ui.jpg"
+             alt="PrepAI candidate dashboard showing the assessment pipeline, profile completeness and ATS match score rings, and role match breakdown."
+             width="1600" height="900" loading="eager" fetchpriority="high">
+      </div>
+    </section>
+
+    <div class="stats-banner">
+      <div class="glass-card">
+        <div class="stat-number gradient-text">4</div>
+        <div class="stat-label">Assessment rounds</div>
+      </div>
+      <div class="glass-card">
+        <div class="stat-number gradient-text">100+</div>
+        <div class="stat-label">Aptitude questions</div>
+      </div>
+      <div class="glass-card">
+        <div class="stat-number gradient-text">16</div>
+        <div class="stat-label">Target job roles</div>
+      </div>
+      <div class="glass-card">
+        <div class="stat-number gradient-text">4</div>
+        <div class="stat-label">Coding languages</div>
+      </div>
+    </div>
+
+    <section id="how-it-works" class="landing-section">
+      <div class="section-header">
+        <span class="eyebrow">How it works</span>
+        <h2>From resume to report in four rounds</h2>
+        <p>Each round unlocks the next, so your preparation follows the same order a real hiring loop does.</p>
+      </div>
+
+      <ol class="steps-grid">
+        <li class="step-card">
+          <div class="step-num">1</div>
+          <h3>Upload your resume</h3>
+          <p>Gemini parses your skills, education, and projects, then scores ATS compatibility and detects your target role.</p>
+        </li>
+        <li class="step-card">
+          <div class="step-num">2</div>
+          <h3>Take the aptitude test</h3>
+          <p>15 randomized questions across quantitative, logical, and verbal reasoning on a 15-minute timer. Pass mark is 60%.</p>
+        </li>
+        <li class="step-card">
+          <div class="step-num">3</div>
+          <h3>Solve coding problems</h3>
+          <p>Role-matched algorithm challenges in a real editor, executed against public and hidden test cases.</p>
+        </li>
+        <li class="step-card">
+          <div class="step-num">4</div>
+          <h3>Sit the AI interview</h3>
+          <p>Record video answers to questions built from your resume, then read the evidence-based report.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="features" class="landing-section">
+      <div class="section-header">
+        <span class="eyebrow">Features</span>
+        <h2>A complete <span class="gradient-text">assessment pipeline</span></h2>
+        <p>Every stage of a technical loop, instrumented and scored.</p>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i></div>
+          <h3>ATS resume parser</h3>
+          <p>Extracts skills, education, and experience to score ATS compatibility and auto-detect the roles you match.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-calculator" aria-hidden="true"></i></div>
+          <h3>Randomized aptitude test</h3>
+          <p>A timed 15-minute exam drawn from a 100+ question bank across quantitative, logical, and verbal tiers.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-code" aria-hidden="true"></i></div>
+          <h3>IDE coding workspace</h3>
+          <p>Role-tailored problems in Python, C++, Java, and JavaScript with three public cases plus hidden evaluation cases.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-video" aria-hidden="true"></i></div>
+          <h3>AI video interviewer</h3>
+          <p>Real-time speech recognition and synthesis, with a full transcript of every turn saved to your report.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></div>
+          <h3>Evidence-based report</h3>
+          <p>Per-question grading with strengths, growth areas, and a recommended learning path — not just a number.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></div>
+          <h3>Recruiter portal</h3>
+          <p>An admin dashboard for reviewing candidate results, ATS scores, and round-by-round progress, exportable to CSV.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="pipeline" class="landing-section">
+      <div class="section-header">
+        <span class="eyebrow">Inside the pipeline</span>
+        <h2>Scored on evidence, not vibes</h2>
+        <p>Every round produces something concrete you can act on before the real interview.</p>
+      </div>
+
+      <div class="split-row">
+        <div class="split-copy">
+          <h3>Your resume decides the whole loop</h3>
+          <p>The parser reads your PDF once and that result drives everything downstream — which coding problems you get and which questions the interviewer asks.</p>
+          <ul class="check-list">
+            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>ATS match score with detected and missing skills</span></li>
+            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Automatic role detection across 16 job tracks</span></li>
+            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Profile completeness tracking as you fill gaps</span></li>
+          </ul>
+        </div>
+        <div class="split-media">
+          <div class="mock-panel">
+            <div class="mock-row"><span>ATS match score</span><strong>85</strong></div>
+            <div class="mock-row"><span>Profile completeness</span><div class="mock-meter"><i style="width: 75%;"></i></div></div>
+            <div class="mock-row"><span>Detected role</span><strong>Full Stack Developer</strong></div>
+            <div class="mock-row"><span>Detected skills</span><strong>18</strong></div>
+            <div class="mock-row"><span>Missing skills</span><strong>4</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-row is-reversed">
+        <div class="split-copy">
+          <h3>A coding round that runs your code</h3>
+          <p>Problems are picked for your detected role and executed for real against public and hidden test cases — the same pass/fail signal an interviewer would see.</p>
+          <ul class="check-list">
+            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Four languages, syntax highlighting, starter templates</span></li>
+            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Run against samples, then submit against hidden cases</span></li>
+            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Hints, editorial notes, and similar questions per problem</span></li>
+          </ul>
+        </div>
+        <div class="split-media">
+          <div class="mock-panel">
+            <div class="mock-row"><span>Status</span><strong class="text-success">Accepted</strong></div>
+            <div class="mock-row"><span>Test cases passed</span><strong>12 / 12</strong></div>
+            <div class="mock-row"><span>Language</span><strong>Python 3</strong></div>
+            <div class="mock-row"><span>Difficulty</span><strong>Medium</strong></div>
+            <div class="mock-row"><span>Problems solved</span><div class="mock-meter"><i style="width: 60%;"></i></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="split-row">
+        <div class="split-copy">
+          <h3>An interviewer that listens and grades</h3>
+          <p>Answer out loud. The AI tracks how many of your responses were substantive, scores each one, and tells you exactly where the answer thinned out.</p>
+          <ul class="check-list">
+            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Live speech-to-text with an editable transcript</span></li>
+            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Per-question evidence log, not a single opaque score</span></li>
+            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span>Strengths, growth areas, and a learning path</span></li>
+          </ul>
+        </div>
+        <div class="split-media">
+          <div class="mock-panel">
+            <div class="mock-row"><span>Overall score</span><strong>78</strong></div>
+            <div class="mock-row"><span>Questions answered</span><strong>8 / 8</strong></div>
+            <div class="mock-row"><span>Meaningful answers</span><strong>7 / 8</strong></div>
+            <div class="mock-row"><span>Communication</span><div class="mock-meter"><i style="width: 82%;"></i></div></div>
+            <div class="mock-row"><span>Technical depth</span><div class="mock-meter"><i style="width: 71%;"></i></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="landing-section">
+      <div class="section-header">
+        <span class="eyebrow">FAQ</span>
+        <h2>Common questions</h2>
+      </div>
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Do I need to upload a resume to start?</summary>
+          <p>You can take the aptitude test without one, but the resume is what personalizes the rest of the pipeline. Without it, coding problems and interview questions fall back to a general Software Engineer track.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>What happens to my resume file?</summary>
+          <p>It is uploaded to your own account, parsed once to extract skills and education, and used only to generate your scores and questions. You can replace it at any time from your profile.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Which languages does the coding round support?</summary>
+          <p>Python 3, C++ (GCC), Java, and JavaScript (Node.js). Each problem ships with a starter template per language, and your submission runs against both public and hidden test cases.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Do I need a webcam for the AI interview?</summary>
+          <p>Yes — the interview is video-based. You record an answer to each question with your webcam and microphone, review it, and can re-record before submitting. Your speech is transcribed live, so use Chrome or Edge on desktop for the full experience.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can I retake a round?</summary>
+          <p>Yes. Aptitude questions are drawn randomly from the bank each time, so retakes give you a fresh set rather than the same paper again.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary>Is there a recruiter view?</summary>
+          <p>Admin accounts get a portal listing every candidate with ATS score, round-by-round results, and a per-candidate detail view, exportable to CSV.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="cta-band">
+      <h2>Practice. Prepare. Perform.</h2>
+      <p>Run the full pipeline once and find out exactly where you stand before it counts.</p>
+      <a href="pages/signup.html" class="btn btn-primary btn-lg">
+        Create your free account <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+      </a>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="brand-logo">
+          <img src="assets/logo-transparent.png" alt="PrepAI" class="brand-logo-img">
+        </a>
+        <p>An AI-powered technical assessment and interview preparation platform. Practice. Prepare. Perform.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#how-it-works">How it works</a></li>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pipeline">Pipeline</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Assessments</h4>
+        <ul>
+          <li><a href="pages/aptitude.html">Aptitude test</a></li>
+          <li><a href="pages/coding.html">Coding round</a></li>
+          <li><a href="pages/interview.html">AI interview</a></li>
+          <li><a href="pages/profile.html">Resume &amp; ATS</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Account</h4>
+        <ul>
+          <li><a href="pages/signup.html">Create account</a></li>
+          <li><a href="pages/login.html">Sign in</a></li>
+          <li><a href="pages/forgot-password.html">Reset password</a></li>
+          <li><a href="pages/dashboard.html">Dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal">
+      <span>© 2026 PrepAI Technical Assessment Suite. All rights reserved.</span>
+      <span>Built with Google Gemini</span>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

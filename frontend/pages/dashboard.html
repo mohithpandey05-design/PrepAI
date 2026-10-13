@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Center — PrepAI Platform</title>
+  <meta name="description" content="Track your assessment progress: resume ATS score, aptitude, coding round, and AI interview.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="icon" type="image/png" href="../assets/logo-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+  <nav class="navbar">
+    <a href="../index.html" class="brand-logo">
+      <img src="../assets/logo-transparent.png" alt="PrepAI" class="brand-logo-img">
+    </a>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinksMenu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+    <div class="nav-links" id="navLinksMenu">
+      <a href="dashboard.html" class="nav-link active" aria-current="page"><i class="fa-solid fa-gauge" aria-hidden="true"></i> Dashboard</a>
+      <a href="profile.html" class="nav-link"><i class="fa-solid fa-user" aria-hidden="true"></i> Profile &amp; Resume</a>
+      <a href="aptitude.html" class="nav-link"><i class="fa-solid fa-calculator" aria-hidden="true"></i> Aptitude Test</a>
+      <a href="coding.html" class="nav-link"><i class="fa-solid fa-code" aria-hidden="true"></i> Coding Round</a>
+      <a href="interview.html" class="nav-link"><i class="fa-solid fa-video" aria-hidden="true"></i> AI Video Interview</a>
+      <div class="user-badge">
+        <div class="user-avatar-sm" id="navAvatar" aria-hidden="true">C</div>
+        <span id="navUserName">Candidate</span>
+      </div>
+      <button id="logoutBtn" class="btn btn-secondary btn-sm">
+        <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Logout
+      </button>
+    </div>
+  </nav>
+
+  <main class="dashboard-container" id="mainContent">
+
+    <div class="top-banner-card">
+      <div class="top-banner-left">
+        <div class="banner-icon-box" aria-hidden="true">
+          <i class="fa-solid fa-briefcase"></i>
+        </div>
+        <div>
+          <h1 class="banner-title">
+            <span id="welcomeHeading">Welcome back</span>
+            <span id="resumeDerivedBadge" class="resume-derived-badge hidden">
+              <i class="fa-solid fa-file-lines" aria-hidden="true"></i> from resume
+            </span>
+          </h1>
+          <p class="banner-subtitle">Track your progress and build your candidate profile.</p>
+        </div>
+      </div>
+
+      <div class="top-banner-right">
+        <div class="ai-talent-pill hidden" id="roleChip">
+          <i class="fa-solid fa-robot" aria-hidden="true"></i> Target role
+          <span class="role-pill-blue" id="selectedRoleText">Software Engineer</span>
+          <button type="button" id="confirmRoleBtn" class="confirm-dropdown-btn">
+            Confirm <span id="confirmRoleBtnName"></span>
+          </button>
+        </div>
+        <div id="detectedRoleChip" class="badge badge-secondary hidden">
+          <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>
+          Detected: <span id="detectedRoleText">Software Engineer</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="roleBanner" class="role-banner hidden">
+      <span>
+        AI recommended role: <strong id="bannerRoleText">Software Engineer</strong>
+      </span>
+      <div class="flex items-center gap-2">
+        <label class="sr-only" for="bannerRoleSelect">Choose a different target role</label>
+        <select id="bannerRoleSelect" class="form-control"></select>
+        <button type="button" id="changeRoleBtn" class="btn btn-secondary btn-sm">Change</button>
+      </div>
+    </div>
+
+    <div class="dashboard-main-grid">
+
+      <div class="dashboard-col">
+
+        <section class="card-section" aria-labelledby="progressHeading">
+          <h2 class="card-title-header" id="progressHeading">
+            <i class="fa-solid fa-flag" aria-hidden="true"></i> Overall assessment progress
+          </h2>
+
+          <div class="stepper-pipeline-row">
+            <div class="step-chip" id="stepResumeUpload">
+              <div class="circle-num-icon" aria-hidden="true">1</div>
+              <span>Resume</span>
+              <span class="badge-locked-gray" id="statusResumeUpload">Pending</span>
+            </div>
+            <span class="pipeline-arrow" aria-hidden="true"></span>
+
+            <div class="step-chip" id="stepResumeAnalyze">
+              <div class="circle-num-icon" aria-hidden="true">2</div>
+              <span>ATS analysis</span>
+              <span class="badge-locked-gray" id="statusResumeAnalyze">Pending</span>
+            </div>
+            <span class="pipeline-arrow" aria-hidden="true"></span>
+
+            <div class="step-chip" id="stepAptitude">
+              <div class="circle-num-icon" aria-hidden="true">3</div>
+              <span>Aptitude test</span>
+              <span class="badge-locked-gray" id="statusAptitude">Pending</span>
+            </div>
+            <span class="pipeline-arrow" aria-hidden="true"></span>
+
+            <div class="step-chip" id="stepCoding">
+              <div class="circle-num-icon" aria-hidden="true">4</div>
+              <span>Coding</span>
+              <span class="badge-locked-gray" id="statusCoding">Locked</span>
+            </div>
+            <span class="pipeline-arrow" aria-hidden="true"></span>
+
+            <div class="step-chip" id="stepInterview">
+              <div class="circle-lock-icon" aria-hidden="true"><i class="fa-solid fa-lock"></i></div>
+              <span>AI interview</span>
+              <span class="badge-locked-gray" id="statusInterview">Locked</span>
+            </div>
+          </div>
+
+          <div class="summary-pill-bar" id="pipelineSummary" aria-live="polite">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <span>Start with your resume to unlock the rest of the pipeline.</span>
+          </div>
+        </section>
+
+        <section class="card-section" aria-labelledby="profileHeading">
+          <h2 class="card-title-header" id="profileHeading">
+            <i class="fa-solid fa-user" aria-hidden="true"></i> Profile &amp; skills
+          </h2>
+
+          <div class="rings-row">
+            <div class="ring-cell">
+              <div class="donut-ring">
+                <svg class="donut" viewBox="0 0 36 36" role="img" aria-labelledby="profileRingLabel">
+                  <title id="profileRingLabel">Profile completion</title>
+                  <path class="donut-track" d="M18 2.5 a 15.5 15.5 0 0 1 0 31 a 15.5 15.5 0 0 1 0 -31"></path>
+                  <path class="donut-value" id="profileCirclePath" stroke-dasharray="0, 100"
+                        d="M18 2.5 a 15.5 15.5 0 0 1 0 31 a 15.5 15.5 0 0 1 0 -31"></path>
+                </svg>
+                <div class="donut-center">
+                  <span class="donut-value-text" id="completionPercent">0%</span>
+                  <span class="donut-label">Profile</span>
+                </div>
+              </div>
+              <p class="ring-caption">Fill in your details to strengthen your profile.</p>
+            </div>
+
+            <div class="ring-cell">
+              <div class="donut-ring">
+                <svg class="donut" viewBox="0 0 36 36" role="img" aria-labelledby="atsRingLabel">
+                  <title id="atsRingLabel">Resume ATS score</title>
+                  <path class="donut-track" d="M18 2.5 a 15.5 15.5 0 0 1 0 31 a 15.5 15.5 0 0 1 0 -31"></path>
+                  <path class="donut-value is-success" id="atsCirclePath" stroke-dasharray="0, 100"
+                        d="M18 2.5 a 15.5 15.5 0 0 1 0 31 a 15.5 15.5 0 0 1 0 -31"></path>
+                </svg>
+                <div class="donut-center">
+                  <span class="donut-value-text" id="dashResumeScore">—</span>
+                  <span class="donut-label">ATS score</span>
+                </div>
+              </div>
+              <p class="ring-caption">Upload a resume to generate an ATS score.</p>
+            </div>
+          </div>
+
+          <div class="profile-kv-list" id="profileDetails">
+            <div class="profile-kv-row">
+              <span class="kv-label">Name</span>
+              <div class="kv-pill is-empty" id="profileNamePill">Not set</div>
+            </div>
+            <div class="profile-kv-row">
+              <span class="kv-label">Email</span>
+              <div class="kv-pill is-empty" id="profileEmailPill">Not set</div>
+            </div>
+            <div class="profile-kv-row">
+              <span class="kv-label">College</span>
+              <div class="kv-pill is-empty" id="profileCollegePill">Not set</div>
+            </div>
+            <div class="profile-kv-row">
+              <span class="kv-label">Branch</span>
+              <div class="kv-pill is-empty" id="profileBranchPill">Not set</div>
+            </div>
+            <div class="profile-kv-row">
+              <span class="kv-label">Skills</span>
+              <div class="skills-pills-row" id="profileSkillsRow">
+                <span class="skill-tag-gray">No skills added yet</span>
+                <a href="profile.html" class="skill-plus-btn" aria-label="Add skills on your profile">+</a>
+              </div>
+            </div>
+          </div>
+
+          <div id="progressBar" class="hidden"></div>
+
+          <div class="ats-score-bar-row">
+            <div class="flex items-center">
+              <span class="score-number-big" id="dashResumeScoreBadge">—</span>
+              <span class="score-text-label">Match score · ATS &amp; skills</span>
+            </div>
+            <div class="ai-verified-badge">
+              <i class="fa-solid fa-robot" aria-hidden="true"></i> AI verified
+            </div>
+          </div>
+
+          <div id="analysisEmpty" class="empty-state mt-4">
+            <i class="fa-solid fa-file-circle-question" aria-hidden="true"></i>
+            <p>No resume analysis yet. <a href="profile.html">Upload your resume</a> to see detected and missing skills.</p>
+          </div>
+
+          <div id="analysisDetails" class="skills-readout hidden">
+            <div>
+              <h4>Detected skills</h4>
+              <div class="tags-container" id="dashDetectedSkills"></div>
+            </div>
+            <div>
+              <h4>Missing for your target role</h4>
+              <div class="tags-container" id="dashMissingSkills"></div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <div class="dashboard-col">
+
+        <section class="card-section" aria-labelledby="roundsHeading">
+          <h2 class="card-title-header" id="roundsHeading">
+            <i class="fa-solid fa-box-archive" aria-hidden="true"></i> Assessment rounds
+          </h2>
+
+          <div class="round-card-item">
+            <div class="round-card-left">
+              <div class="round-icon-box" aria-hidden="true"><i class="fa-solid fa-brain"></i></div>
+              <div>
+                <h3 class="round-title">Round 1: Aptitude test</h3>
+                <p class="round-subtext">
+                  <span id="dashAptitudeStatus">Not attempted yet</span>
+                </p>
+                <p class="round-subtext" id="dashAptitudeResult">
+                  <span>Score: <strong id="dashAptScore">—</strong> / 15</span>
+                  <span class="badge-percent-green" id="dashAptPercentage">—</span>
+                </p>
+              </div>
+            </div>
+            <a href="aptitude.html" id="dashAptActionBtn" class="btn-blue-solid">
+              <i class="fa-solid fa-play" aria-hidden="true"></i> Start
+            </a>
+          </div>
+
+          <div class="round-card-item is-locked" id="dashCodingCard">
+            <div class="round-card-left">
+              <div class="round-icon-box" aria-hidden="true"><i class="fa-solid fa-laptop-code"></i></div>
+              <div>
+                <h3 class="round-title">Round 2: Coding</h3>
+                <p class="round-subtext">
+                  <span id="dashCodingStatus">Locked — complete the aptitude test first</span>
+                </p>
+              </div>
+            </div>
+            <a href="coding.html" id="dashCodingActionBtn" class="btn-gray-outline">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i> Locked
+            </a>
+          </div>
+
+          <div class="round-card-item is-locked" id="dashInterviewCard">
+            <div class="round-card-left">
+              <div class="round-icon-box" aria-hidden="true"><i class="fa-solid fa-video"></i></div>
+              <div>
+                <h3 class="round-title">Round 3: AI video interview</h3>
+                <p class="round-subtext">
+                  <span id="dashInterviewStatus">Locked — complete the coding round first</span>
+                </p>
+                <p class="round-subtext hidden" id="dashInterviewResult">
+                  <span>Overall score: <strong id="dashIntScore">0</strong> / 100</span>
+                </p>
+              </div>
+            </div>
+            <a href="interview.html" id="dashInterviewActionBtn" class="btn-gray-outline">
+              <i class="fa-solid fa-lock" aria-hidden="true"></i> Locked
+            </a>
+          </div>
+
+          <div class="bottom-round-actions">
+            <a href="profile.html" class="btn-gray-outline">
+              <i class="fa-solid fa-file-arrow-up" aria-hidden="true"></i> Manage resume
+            </a>
+            <a href="aptitude.html" class="btn-yellow-outline">
+              <i class="fa-solid fa-rotate-right" aria-hidden="true"></i> Retake aptitude
+            </a>
+          </div>
+        </section>
+
+        <section class="card-section" aria-labelledby="matchHeading">
+          <h2 class="card-title-header" id="matchHeading">
+            <i class="fa-solid fa-robot" aria-hidden="true"></i> AI talent matching
+          </h2>
+
+          <div class="ai-match-box">
+            <div class="target-role-pill-row">
+              <div class="target-role-text">
+                <i class="fa-solid fa-bullseye" aria-hidden="true"></i> Target role:
+                <span class="role-name-bold-pill" id="matchRoleText">Software Engineer</span>
+              </div>
+              <span class="badge badge-primary">
+                <i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> AI recommended
+              </span>
+            </div>
+
+            <p class="ai-match-note">
+              Gemini analyses your resume and adapts every round — aptitude weighting, coding
+              problems, and interview questions — to the role above. Change it any time from
+              the banner at the top of this page.
+            </p>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <div id="toastContainer"></div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>

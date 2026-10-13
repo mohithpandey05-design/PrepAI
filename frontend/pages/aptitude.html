@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aptitude Assessment — PrepAI</title>
+  <meta name="description" content="Timed aptitude assessment covering quantitative reasoning, logical deduction, and verbal ability.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="icon" type="image/png" href="../assets/logo-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/aptitude.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+  <nav class="navbar">
+    <a href="../index.html" class="brand-logo">
+      <img src="../assets/logo-transparent.png" alt="PrepAI" class="brand-logo-img">
+    </a>
+    <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navLinksMenu">
+      <i class="fa-solid fa-bars" aria-hidden="true"></i>
+    </button>
+    <div class="nav-links" id="navLinksMenu">
+      <a href="dashboard.html" class="nav-link"><i class="fa-solid fa-gauge" aria-hidden="true"></i> Dashboard</a>
+      <a href="profile.html" class="nav-link"><i class="fa-solid fa-user" aria-hidden="true"></i> Profile &amp; Resume</a>
+      <a href="aptitude.html" class="nav-link active" aria-current="page"><i class="fa-solid fa-calculator" aria-hidden="true"></i> Aptitude Test</a>
+      <a href="coding.html" class="nav-link"><i class="fa-solid fa-code" aria-hidden="true"></i> Coding Round</a>
+      <a href="interview.html" class="nav-link"><i class="fa-solid fa-video" aria-hidden="true"></i> AI Video Interview</a>
+      <button id="logoutBtn" class="btn btn-secondary btn-sm">
+        <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Logout
+      </button>
+    </div>
+  </nav>
+
+  <main class="aptitude-page-container" id="mainContent">
+
+    <section id="startView" class="glass-card text-center py-6 start-card" aria-labelledby="startHeading">
+      <div class="card-icon is-xl" aria-hidden="true">
+        <i class="fa-solid fa-brain"></i>
+      </div>
+
+      <h1 id="startHeading">General Aptitude Assessment</h1>
+      <p class="start-lead">
+        Evaluates quantitative reasoning, logical deduction, and verbal ability across
+        15 randomized questions. Passing score requirement: <strong>60%</strong>.
+      </p>
+
+      <div class="rules-grid mb-6">
+        <div class="rule-box">
+          <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+          <span>15 Questions</span>
+        </div>
+        <div class="rule-box">
+          <i class="fa-solid fa-clock" aria-hidden="true"></i>
+          <span>15 Minute Timer</span>
+        </div>
+        <div class="rule-box">
+          <i class="fa-solid fa-shuffle" aria-hidden="true"></i>
+          <span>Randomized Bank</span>
+        </div>
+      </div>
+
+      <button id="startTestBtn" class="btn btn-primary btn-lg">
+        <span class="btn-text">Begin Aptitude Test <i class="fa-solid fa-play" aria-hidden="true"></i></span>
+        <span class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i></span>
+      </button>
+    </section>
+
+    <div id="testView" class="aptitude-workspace question-layout hidden">
+
+      <aside class="glass-card palette-panel" aria-label="Question palette">
+        <div>
+          <div class="panel-header">
+            <h2><i class="fa-solid fa-table-cells" aria-hidden="true"></i> Question Palette</h2>
+            <span class="palette-subtitle">Jump to any question</span>
+          </div>
+
+          <div class="palette-grid" id="questionPalette">
+
+          </div>
+        </div>
+
+        <div class="palette-legend">
+          <div class="legend-item"><span class="legend-dot active" aria-hidden="true"></span> Current</div>
+          <div class="legend-item"><span class="legend-dot answered" aria-hidden="true"></span> Answered</div>
+          <div class="legend-item"><span class="legend-dot unasked" aria-hidden="true"></span> Unanswered</div>
+        </div>
+      </aside>
+
+      <section class="glass-card aptitude-main-card" aria-label="Current question">
+        <div>
+          <div class="question-card-header">
+            <div class="badge-group">
+              <span class="badge badge-primary" id="questionCategory">QUANTITATIVE</span>
+              <span class="badge badge-warning" id="questionDifficulty">MEDIUM</span>
+            </div>
+            <div class="question-counter-badge">
+              <i class="fa-solid fa-circle-question" aria-hidden="true"></i>
+              Question <span id="progressText">1 / 15</span>
+            </div>
+          </div>
+
+          <div class="question-body">
+            <h2 id="questionText" class="question-heading" aria-live="polite">Loading question…</h2>
+          </div>
+
+          <div class="options-grid" id="optionsContainer" role="group" aria-label="Answer options">
+
+          </div>
+        </div>
+
+        <div class="workspace-nav">
+          <button id="prevBtn" class="btn btn-secondary" disabled>
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i> Previous
+          </button>
+
+          <div class="nav-right-group">
+            <button id="nextBtn" class="btn btn-secondary">
+              Next Question <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+
+            <button id="submitTestBtn" class="btn btn-primary hidden">
+              <span class="btn-text">Submit Assessment <i class="fa-solid fa-paper-plane" aria-hidden="true"></i></span>
+              <span class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <aside class="glass-card sidebar-panel" aria-label="Assessment status">
+        <div class="timer-card" id="timerCard">
+          <span class="timer-label"><i class="fa-solid fa-stopwatch" aria-hidden="true"></i> Time remaining</span>
+          <div class="timer-display-box">
+            <span id="timerDisplay" role="timer" aria-live="off">15:00</span>
+          </div>
+        </div>
+
+        <div class="progress-block">
+          <div class="progress-header">
+            <span>Overall completion</span>
+            <span id="progressPercentageText">7%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="testProgressBar" style="width: 0%;"></div>
+          </div>
+        </div>
+
+        <div class="stats-counter-grid">
+          <div class="stat-pill answered-pill">
+            <span class="pill-value" id="answeredCountDisplay">0</span>
+            <span class="pill-label">Answered</span>
+          </div>
+          <div class="stat-pill unanswered-pill">
+            <span class="pill-value" id="unansweredCountDisplay">15</span>
+            <span class="pill-label">Unanswered</span>
+          </div>
+        </div>
+
+        <div class="summary-info-box">
+          <div class="info-row">
+            <span>Passing mark</span>
+            <strong>60%</strong>
+          </div>
+          <div class="info-row">
+            <span>Total questions</span>
+            <strong>15</strong>
+          </div>
+          <div class="info-row">
+            <span>Distribution</span>
+            <strong>5 Quant • 5 Logic • 5 Verbal</strong>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <section id="resultView" class="glass-card text-center hidden py-6 result-card" aria-labelledby="resultTitle">
+      <div id="resultIcon" class="card-icon is-xl" aria-hidden="true">
+        <i class="fa-solid fa-award"></i>
+      </div>
+
+      <h1 id="resultTitle" class="result-title">Assessment Completed</h1>
+      <p id="resultSubtitle" class="result-subtitle">Here is your aptitude performance breakdown.</p>
+
+      <div class="score-display">
+        <div class="big-score" id="resultPercentage">0%</div>
+        <div class="score-label" id="resultStatus">Assessment result</div>
+      </div>
+
+      <div id="resultDetails" class="stats-summary-grid mb-6">
+
+      </div>
+
+      <div class="result-actions">
+        <a href="dashboard.html" class="btn btn-secondary">Return to Dashboard</a>
+        <a href="coding.html" id="proceedCodingBtn" class="btn btn-primary">
+          Proceed to Coding Round <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/nav.js"></script>
+  <script src="../js/aptitude.js"></script>
+</body>
+</html>

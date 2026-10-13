@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Coding Assessment — PrepAI</title>
+  <meta name="description" content="Role-tailored coding assessment with a live editor, public samples, and hidden test cases.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#4f46e5">
+  <link rel="icon" type="image/png" href="../assets/logo-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap">
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/coding.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ace.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.12/ext-language_tools.js"></script>
+</head>
+<body class="coding-page-body">
+
+  <a href="#mainContent" class="skip-link">Skip to main content</a>
+
+  <header class="coding-topbar">
+    <div class="topbar-left">
+      <a href="dashboard.html" class="brand-logo-sm" aria-label="Back to dashboard">
+        <img src="../assets/logo-transparent.png" alt="PrepAI" class="brand-logo-img">
+      </a>
+      <div class="divider-v" aria-hidden="true"></div>
+
+      <button id="probListBtn" class="topbar-btn">
+        <i class="fa-solid fa-list-ul" aria-hidden="true"></i> <span>Problem List</span>
+      </button>
+
+      <div class="nav-arrows">
+        <button id="prevProbBtn" class="arrow-btn" title="Previous problem" aria-label="Previous problem">
+          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <button id="nextProbBtn" class="arrow-btn" title="Next problem" aria-label="Next problem">
+          <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        </button>
+        <button id="shuffleProbBtn" class="arrow-btn" title="Shuffle problem" aria-label="Shuffle problem">
+          <i class="fa-solid fa-shuffle" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <div class="topbar-center">
+      <span class="role-badge-pill" id="topRoleBadge">
+        <i class="fa-solid fa-user-tag" aria-hidden="true"></i> Target Role: Software Engineer
+      </span>
+    </div>
+
+    <div class="topbar-right">
+      <label class="sr-only" for="langSelect">Programming language</label>
+      <select id="langSelect" class="lang-select-pill">
+        <option value="python">Python 3</option>
+        <option value="cpp">C++ (GCC)</option>
+        <option value="java">Java</option>
+        <option value="javascript">JavaScript (Node.js)</option>
+      </select>
+
+      <button id="runCodeBtn" class="topbar-action-btn btn-run">
+        <i class="fa-solid fa-play" aria-hidden="true"></i> Run Code
+      </button>
+
+      <button id="submitCodeBtn" class="topbar-action-btn btn-submit">
+        <i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i> Submit Solution
+      </button>
+
+      <div class="divider-v" aria-hidden="true"></div>
+      <button id="logoutBtn" class="arrow-btn" title="Log out" aria-label="Log out">
+        <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="ide-main-container" id="mainContent">
+
+    <div id="startView" class="start-overlay">
+      <section class="glass-card text-center py-6 coding-start-card" aria-labelledby="codingStartHeading">
+        <div class="card-icon" aria-hidden="true">
+          <i class="fa-solid fa-laptop-code"></i>
+        </div>
+        <h1 id="codingStartHeading">Role Coding Assessment</h1>
+        <p class="coding-start-lead">
+          A role-tailored technical problem suite of progressive algorithms (Easy → Medium → Hard),
+          evaluated in real time against public and hidden test cases.
+        </p>
+
+        <button id="startTestBtn" class="btn btn-primary btn-lg">
+          <span class="btn-text">Initialize Coding Workspace <i class="fa-solid fa-terminal" aria-hidden="true"></i></span>
+          <span class="spinner hidden"><i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i> Loading questions…</span>
+        </button>
+      </section>
+    </div>
+
+    <div id="codingWorkspace" class="ide-workspace hidden">
+
+      <section class="ide-panel left-panel" aria-label="Problem statement">
+        <div class="panel-tabs" role="tablist" aria-label="Problem panel tabs">
+          <button class="ptab-btn active" data-ptab="description"><i class="fa-solid fa-file-lines" aria-hidden="true"></i> Description</button>
+          <button class="ptab-btn" data-ptab="editorial"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Editorial</button>
+          <button class="ptab-btn" data-ptab="solutions"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Solutions</button>
+          <button class="ptab-btn" data-ptab="submissions"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i> Submissions</button>
+        </div>
+
+        <div class="panel-content" id="problemContent">
+          <div class="prob-header-row">
+            <h1 id="probTitle" class="prob-title">Loading problem…</h1>
+            <span class="diff-badge badge-easy" id="probDifficulty">Easy</span>
+          </div>
+
+          <div class="topics-row" id="probTopics">
+
+          </div>
+
+          <div class="prob-meta-bar mb-3">
+            <div class="meta-item"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Acceptance: <strong id="metaAcceptance">—</strong></div>
+            <div class="meta-item"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Submissions: <strong id="metaSubmissions">—</strong></div>
+            <div class="meta-item"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Role: <strong id="metaRole">—</strong></div>
+            <div class="meta-item"><i class="fa-solid fa-clock" aria-hidden="true"></i> Est. time: <strong>15m</strong></div>
+          </div>
+
+          <div class="prob-description mb-4" id="probDesc">
+            Loading problem description…
+          </div>
+
+          <div class="section-block mb-4">
+            <h2 class="section-heading"><i class="fa-solid fa-vial" aria-hidden="true"></i> Examples</h2>
+            <div id="examplesContainer">
+
+            </div>
+          </div>
+
+          <div class="section-block mb-3">
+            <h2 class="section-heading"><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Input format</h2>
+            <div id="probInputFmt" class="fmt-box"></div>
+          </div>
+
+          <div class="section-block mb-3">
+            <h2 class="section-heading"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Output format</h2>
+            <div id="probOutputFmt" class="fmt-box"></div>
+          </div>
+
+          <div class="section-block mb-3">
+            <h2 class="section-heading"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Constraints</h2>
+            <div id="probConstraints" class="fmt-box"></div>
+          </div>
+
+          <div id="followUpBlock" class="section-block mb-4 hidden">
+            <h2 class="section-heading is-followup"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> Follow-up</h2>
+            <div id="probFollowUp" class="fmt-box is-followup"></div>
+          </div>
+
+          <div class="accordion-group mt-4 mb-4">
+            <div class="accordion-item is-hints" id="accordionHintsCard">
+              <button type="button" class="accordion-header" id="btnToggleHints" aria-expanded="false" aria-controls="hintsBody">
+                <span><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Hints (<span id="hintsCount">0</span>)</span>
+                <i class="fa-solid fa-chevron-down acc-icon" aria-hidden="true"></i>
+              </button>
+              <div class="accordion-body hidden" id="hintsBody">
+
+              </div>
+            </div>
+
+            <div class="accordion-item is-similar" id="accordionSimilarCard">
+              <button type="button" class="accordion-header" id="btnToggleSimilar" aria-expanded="false" aria-controls="similarBody">
+                <span><i class="fa-solid fa-clone" aria-hidden="true"></i> Similar questions</span>
+                <i class="fa-solid fa-chevron-down acc-icon" aria-hidden="true"></i>
+              </button>
+              <div class="accordion-body hidden" id="similarBody">
+
+              </div>
+            </div>
+
+            <div class="accordion-item is-discussion" id="accordionDiscussionCard">
+              <button type="button" class="accordion-header" id="btnToggleDiscussion" aria-expanded="false" aria-controls="discussionBody">
+                <span><i class="fa-solid fa-comments" aria-hidden="true"></i> Discussion &amp; tips</span>
+                <i class="fa-solid fa-chevron-down acc-icon" aria-hidden="true"></i>
+              </button>
+              <div class="accordion-body hidden" id="discussionBody">
+                <p class="accordion-note">
+                  Aim for optimal time and space complexity, and make sure edge cases —
+                  empty inputs, single elements, and boundary values — are handled cleanly.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <section class="ide-panel right-panel" aria-label="Code editor">
+
+        <div class="editor-section">
+          <div class="editor-header">
+            <span class="editor-label">
+              <i class="fa-solid fa-code" aria-hidden="true"></i> Code editor
+            </span>
+            <button id="resetCodeBtn" class="icon-tool-btn" title="Reset to starter code">
+              <i class="fa-solid fa-arrow-rotate-left" aria-hidden="true"></i> Reset
+            </button>
+          </div>
+          <div id="editor" class="ace-editor-instance"></div>
+        </div>
+
+        <div class="drawer-section" id="testDrawer">
+          <div class="drawer-header">
+            <div class="drawer-tabs">
+              <button class="dtab-btn active" id="tabTestcase"><i class="fa-solid fa-vial" aria-hidden="true"></i> Testcase</button>
+              <button class="dtab-btn" id="tabTestResult"><i class="fa-solid fa-square-poll-vertical" aria-hidden="true"></i> Test result</button>
+            </div>
+            <button id="toggleDrawerBtn" class="drawer-toggle-btn" title="Toggle drawer" aria-label="Toggle result drawer">
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="drawer-body" id="drawerBody">
+
+            <div id="testcaseTabContent">
+              <div class="tc-cases-bar" id="tcInputCasesBar">
+
+              </div>
+              <div class="output-diff-grid mt-2" id="tcInputFields">
+                <div class="diff-field-card is-span-2">
+                  <label><i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i> Input</label>
+                  <pre id="testcaseInputDisplay"></pre>
+                </div>
+                <div class="diff-field-card">
+                  <label><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Expected output</label>
+                  <pre class="is-expected" id="testcaseOutputDisplay"></pre>
+                </div>
+              </div>
+            </div>
+
+            <div id="testResultTabContent" class="hidden">
+              <div id="idleState" class="text-center py-4">
+                <p class="drawer-idle-text">
+                  <i class="fa-solid fa-play" aria-hidden="true"></i>
+                  Click <strong>Run Code</strong> to test the sample cases, or
+                  <strong>Submit Solution</strong> for final evaluation.
+                </p>
+              </div>
+
+              <div id="activeState" class="hidden" aria-live="polite">
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <div id="probListModal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="probListHeading">
+    <div class="glass-card modal-content problem-list-modal">
+      <div class="modal-header">
+        <h2 id="probListHeading">
+          <i class="fa-solid fa-list-check" aria-hidden="true"></i> Assessment problem suite
+        </h2>
+        <button type="button" id="closeProbListModalBtn" class="modal-close" aria-label="Close problem list">&times;</button>
+      </div>
+
+      <div class="table-responsive problem-list-scroll">
+        <table class="problem-list-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Title</th>
+              <th scope="col">Difficulty</th>
+              <th scope="col">Topics</th>
+              <th scope="col" class="pl-action">Status</th>
+            </tr>
+          </thead>
+          <tbody id="probListTableBody">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/config.js"></script>
+  <script src="../js/main.js"></script>
+  <script src="../js/coding.js"></script>
+</body>
+</html>
